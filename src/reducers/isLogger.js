@@ -1,9 +1,8 @@
 const loggerReducer = (state=false,action)=>{
-    switch(action.type){
-        case 'SIGN_IN':
-            return !state;
-        default:
-            return state;
+    if(action.username=='wang' && action.password=='123' && action.type=='SIGN_IN'){
+        return true;
+    }else{
+        return false;
     }
 }
 export default loggerReducer
