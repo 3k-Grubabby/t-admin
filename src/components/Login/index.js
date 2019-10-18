@@ -13,13 +13,14 @@ const divStyle={
     width: '100%',
     height: document.body.clientHeight
 };
+
 const Login = ()=>{
+    
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
-
-
     const isLogged = useSelector(state=>state.isLogged);
     const dispatch = useDispatch();
+
 
 
     const updateUsername = (e) => {
@@ -30,9 +31,32 @@ const Login = ()=>{
     }
     const toLogin = e => {
         e.preventDefault();
-        console.log(username)
-        dispatch(logged(username,password))
+        fetchItem()
     }
+
+
+    const fetchItem = async (action) => {
+        let data = {username:username,password:password}
+        const fetchItem = await fetch(
+            `http://192.168.99.100/api/login`,
+            {
+                method:'POST',
+                body:JSON.stringify(data),
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            })
+
+        const item = await fetchItem.json()    
+        if(username==item.username && password == item.password){
+            dispatch(logged(true))    
+        }else{
+            dispatch(logged(false))   
+        }
+
+    }
+
+
     return (
         <div  style={divStyle}>
                 <Form  className="login-form" onSubmit={toLogin}>

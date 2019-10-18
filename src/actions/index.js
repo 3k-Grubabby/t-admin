@@ -1,7 +1,6 @@
-export const logged = (username,password)=>{
+export const logged = (isLogged)=>{
     return {
         type:'SIGN_IN',
-        username:username,
-        password:password
+        isLogged:isLogged
     }
 }

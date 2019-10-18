@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
 import Login from './components/Login/index'
@@ -11,6 +11,8 @@ import {login} from './actions'
 function App() {
   const isLogged = useSelector(state=>state.isLogged);
   const dispatch = useDispatch();
+
+  
   return (
     <div className="App">
           {isLogged ? <Nav /> : <Login /> }
